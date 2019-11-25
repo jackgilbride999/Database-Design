@@ -1,5 +1,6 @@
 # Database Design Project
 
+## Task
 Design and implement your own database based on the following requirements:
 
 - A *minimum* of 6 relational tables
@@ -10,3 +11,6 @@ Design and implement your own database based on the following requirements:
 
 **Note:** Additional marks will be awarded for innovation and degree of difficulty (in use of SQL). Examples of extra features which could include: examples of the use of variables in SQL/PL, etc.
 You are required to implement the database using MySQL.
+
+## Implementation
+![Entity Relationship Diagram](entity-relationship-model.png)
