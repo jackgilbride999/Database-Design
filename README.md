@@ -13,4 +13,12 @@ Design and implement your own database based on the following requirements:
 You are required to implement the database using MySQL.
 
 ## Implementation
+A database for World Wrestling Entertainment, Inc.
+Relations:
+- Wrestler
+- Championship
+- Show
+- Arena
+- Episode
+- Match
 ![Entity Relationship Diagram](entity-relationship-model.png)
