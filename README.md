@@ -21,4 +21,7 @@ Relations:
 - Arena
 - Episode
 - Match
+
 ![Entity Relationship Diagram](entity-relationship-model.png)
+
+![Relational Diagram](relational-diagram.png)
