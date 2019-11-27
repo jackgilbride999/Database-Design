@@ -25,3 +25,5 @@ Relations:
 ![Entity Relationship Diagram](entity-relationship-model.png)
 
 ![Relational Diagram](relational-diagram.png)
+
+![Functional Dependency Diagram](functional-dependency-diagram.png)
