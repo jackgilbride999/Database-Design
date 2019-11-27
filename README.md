@@ -26,4 +26,4 @@ Relations:
 
 ![Relational Diagram](relational-diagram.png)
 
-![Functional Dependency Diagram](functional-dependency-diagram.png)
+![Functional Dependency Diagram](functional-dependency-diagram.PNG)
