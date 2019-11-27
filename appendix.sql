@@ -10,7 +10,8 @@ CREATE TABLE STAFF (
     Street VARCHAR(20),
     City VARCHAR(20),
     State_Country VARCHAR(20),
-    PRIMARY KEY (Staff_Number)
+    PRIMARY KEY (Staff_Number),
+    CHECK (SALARY > 0)
 );
 
 CREATE TABLE WRESTLER (
@@ -21,7 +22,8 @@ CREATE TABLE WRESTLER (
     Billed_From VARCHAR(50),
     Staff_Number INTEGER NOT NULL,
     PRIMARY KEY (Ring_Name),
-    FOREIGN KEY (Staff_Number) REFERENCES STAFF (Staff_Number)
+    FOREIGN KEY (Staff_Number) REFERENCES STAFF (Staff_Number) ON UPDATE CASCADE,
+    CONSTRAINT CHK_Wrestler CHECK (Height > 0 AND Weight > 0)
 );
 
 CREATE TABLE SHOW (
@@ -38,11 +40,11 @@ CREATE TABLE CHAMPIONSHIP (
     Date_Created DATE,
     Strap_Colour INTEGER,
     Plate_Colour INTEGER,
-    Holder_Name VARCHAR(50),
-    Show_Name VARCHAR(20),
+    Holder_Name VARCHAR(50) NOT NULL,
+    Show_Name VARCHAR(20) NOT NULL,
     PRIMARY KEY (Name),
-    FOREIGN KEY (Holder_Name) REFERENCES WRESTLER (Ring_Name),
-    FOREIGN KEY (Show_Name) REFERENCES SHOW (Name)
+    FOREIGN KEY (Holder_Name) REFERENCES WRESTLER (Ring_Name) ON UPDATE CASCADE,
+    FOREIGN KEY (Show_Name) REFERENCES SHOW (Name) ON UPDATE CASCADE
 );
 
 CREATE TABLE ARENA (
@@ -51,7 +53,8 @@ CREATE TABLE ARENA (
     Street VARCHAR(20),
     City VARCHAR(20),
     State VARCHAR(20),
-    PRIMARY KEY (Name)
+    PRIMARY KEY (Name),
+    CHECK (Attendence > 0)
 );
 
 CREATE TABLE EPISODE(
@@ -60,11 +63,12 @@ CREATE TABLE EPISODE(
     Start_Time TIME(0),
     End_Time TIME(0),
     Date DATE,
-    Show_Name VARCHAR(20),
-    Arena_Name VARCHAR(255),
+    Show_Name VARCHAR(20) NOT NULL,
+    Arena_Name VARCHAR(255) NOT NULL,
     PRIMARY KEY (Title),
-    FOREIGN KEY (Show_Name) REFERENCES SHOW (Name),
-    FOREIGN KEY (Arena_Name) REFERENCES ARENA (Name)
+    FOREIGN KEY (Show_Name) REFERENCES SHOW (Name) ON UPDATE CASCADE,
+    FOREIGN KEY (Arena_Name) REFERENCES ARENA (Name) ON UPDATE CASCADE,
+    CHECK (Number >= 0)
 );
 
 CREATE TABLE MATCH (
@@ -72,18 +76,18 @@ CREATE TABLE MATCH (
     Start_Time TIME(0),
     End_Time TIME(0),
     Outcome VARCHAR(20),
-    Booked_By VARCHAR(255),
+    Booked_By VARCHAR(255) NOT NULL,
     Defence_Of VARCHAR(50),
     PRIMARY KEY (Match_ID),
-    FOREIGN KEY (Booked_By) REFERENCES EPISODE (Title),
-    FOREIGN KEY (Defence_Of) REFERENCES CHAMPIONSHIP (Name)
+    FOREIGN KEY (Booked_By) REFERENCES EPISODE (Title) ON UPDATE CASCADE,
+    FOREIGN KEY (Defence_Of) REFERENCES CHAMPIONSHIP (Name) ON UPDATE CASCADE
 );
 
 CREATE TABLE WRESTLER_IN_MATCH (
     Match_ID INTEGER NOT NULL,
-    Ring_Name VARCHAR(50),
+    Ring_Name VARCHAR(50) NOT NULL,
     Win BIT(1),
     PRIMARY KEY (Match_ID, Ring_Name),
-    FOREIGN KEY (Match_ID) REFERENCES MATCH (Match_ID),
-    FOREIGN KEY (Ring_Name) REFERENCES WRESTLER (Ring_Name)
+    FOREIGN KEY (Match_ID) REFERENCES MATCH (Match_ID) ON UPDATE CASCADE,
+    FOREIGN KEY (Ring_Name) REFERENCES WRESTLER (Ring_Name) ON UPDATE CASCADE
 )
